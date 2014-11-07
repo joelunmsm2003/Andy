@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 
 <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-
+<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Titillium Web'>
 
 <html lang="en">
 <head>
     <meta charset="utf-8">
 </head>
 <body>
+<table border="1" style="width: 231px;"><tbody>
+<tr> <td style="width: 25%;">n</td> <td style="width: 22%;">id </td> <td style="width: 20%;">ip </td><td style="width: 33%;">codigo </td> <td style="width: 30%;">cam</td></tr>
 
 
-<table class="table table-striped">
- <tr class="warning">
-  <td>id_ori_llamadas</td>
+</tbody> </table>
+<!--
+<table> 
+
+    <tr>
+    <td style="width: 30;">n</td>
+  <td width='75px'>id</td>
   <td>age_ip </td>
   <td>age_codigo</td> 
   <td>cam_codigo</td>
@@ -55,23 +52,29 @@
   <td>gestion_editid10</td>  
   <td>gestion_editid11</td>
   <td>id_ori_seg_cola</td>
-  <td>age_nombre/td>
+  <td>age_nombre</td>
   <td>anexo</td>
   <td>esp</td>
   </tr>
 
 
 
-<tr>
-<div id='orillamada'></div>
-</tr>
+</table>-->
+
+<table> 
+
+    <div id='orillamada' class="warning"></div>
+
 
 </table>
 
 
 
+
+
 <script type="text/javascript">
-    
+
+i=0  
 setInterval('moverItem()',2000);
 
 
@@ -88,8 +91,21 @@ ori = $('#count').text()
                             csrfmiddlewaretoken: '{{ csrf_token }}'
                             },
                             success : function(json) {
-                                $('#orillamada').append('<tr><td>'+json[0].fields.age_codigo+'</td></tr>')
+
+                                i=i+1
+                                var trs=$("#orillamada tr").length;
+                                console.log(trs)
+                                 if(trs==20){
+                                  $("#orillamada tr:last").remove();
+                                  
+                                }
+
+                               
+                                $('#orillamada').prepend('<tr><td width=20%>'+i+'</td><td width=20%>'+json[0].fields.age_codigo+'</td><td width=20%>'+json[0].fields.cam_codigo+'</td><td width=20%>'+json[0].fields.llam_numero+'</td><td width=20%>'+json[0].fields.llam_estado+'</td></tr>')
                                 console.log(json[0].fields.age_codigo)
+
+                                 
+
                               
                             },
                     });
@@ -98,7 +114,50 @@ ori = $('#count').text()
 
 </script>
 
+<style type="text/css">
 
+td {
+ 
+    border-bottom: 1px solid #5C84C2;
+  border-top: 1px solid #5C84C2;
+  padding: 0 0.5em;
+ 
+  }
+
+
+
+
+#orillamada{
+ padding: 0.1 0.1em;
+  text-align: center;
+  
+  border-bottom: 1px solid #5C84C2;
+  border-top: 1px solid #5C84C2;
+  font-family: 'Titillium Web';
+  color: #575859;
+  font-size: 12px;
+  width:231px;
+
+
+}
+
+table{
+
+
+  border-bottom: 1px solid #5C84C2;
+  border-top: 1px solid #5C84C2;
+  font-family: 'Titillium Web';
+  color: #575859;
+  font-size: 12px;
+  padding: 0;
+
+
+}
+
+
+
+
+</style>
 
 
 
